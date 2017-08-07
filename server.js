@@ -1,37 +1,18 @@
+//author : Varun Rajiv Mantri
+// Main Server file 
+
+
 var express=require("express");
 var morgan=require("morgan");
 var movieRouter=require("./routes/movieRouter.js");
 var config=require("./config.js");
 var app=express();
-//var passport=require("passport-http");
-//var BasicStrategy=passport.BasicStrategy;
-//var User=require("./models/user.js");
-//configuring passport
-
-//------------------------------------------------------------------
-/*passport.use(new BasicStrategy(function(username,password,done)
-{
-    User.findOne({username:username},function(err,user){
-       if (err) 
-        {
-            return (done(err));
-        }
-        if(!user){
-            return done(null,false);
-        }
-        if (!user.validPassword(password))
-        {
-            return done(null,false);
-        }
-        return done(null,user);
-    });
-}););*/
-//--------------------------------------------------------------------
 
 app.use(morgan('dev'));
+//mounting the router on /movies route
 app.use("/movies",movieRouter);
 
-
+//listening on defult port 3000 and hostname localhost
 app.listen(config.port,config.hostname,function()
 {
    console.log("Server running on http://"+config.hostname+":"+config.port); 
